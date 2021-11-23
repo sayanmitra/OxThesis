@@ -1,0 +1,27 @@
+#To use “Chapter 1” instead of only number
+#Probably the easiest way is to insert the following block of code in Oxford_Thesis.tex just above the line that says %%%%% THE ACTUAL DOCUMENT STARTS HERE (ie on line 97).
+
+\makeatletter
+\newif\ifappendix
+\appendixfalse
+\renewcommand{\startappendices}{\appendix\adjustmtc\noappendicestocpagenum%
+          \addappheadtotoc\appendixpage\appendixtrue}
+\renewcommand{\@makechapterhead}[1]{\chapterheadstartvskip%
+  {\size@chapter{\sectfont\raggedleft
+      {\ifnum \c@secnumdepth >\m@ne%
+        \if@mainmatter%
+        \ifappendix%
+        \fontsize{50}{65}\selectfont%
+        \color{chaptergrey}\raisebox{2mm}{Appendix}
+        \else%
+        \fontsize{50}{65}\selectfont%
+        \color{chaptergrey}\raisebox{2mm}{Chapter}
+        \fi%
+        \chapnumfont\thechapter%
+        \fi\fi
+        \par\nobreak}%
+      {\raggedleft\advance\leftmargin10em\interlinepenalty\@M #1\par}}
+    \nobreak\chapterheadendvskip}}
+\makeatother
+
+#For other modifications or minor edits please visit https://www.oxfordechoes.com/oxford-thesis-template/
